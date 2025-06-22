@@ -2,11 +2,14 @@
 mod app_state; //声明app_state模块
 mod scenes;
 mod systems;
+mod components;
 
 use bevy::prelude::*;
 use crate::app_state::AppState;
 use crate::scenes::*;
-use crate::systems::*;
+use crate::systems::{*, audio::*};
+use crate::components::mymusic::MyMusic;
+
 
 fn main() {
     App::new()
@@ -24,9 +27,12 @@ fn main() {
     //    .add_plugin(ShipPlugin)
     //    .add_plugin(SpacePlugin)
        .add_systems(Startup,setup)
+    //    .add_systems(Update, )
        .run();
 }
 
-fn setup(mut commands: Commands) {
+fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     // 初始化游戏全局设置
+
+    audio::playgroundmusic(commands, asset_server);
 }
